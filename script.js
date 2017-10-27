@@ -28,7 +28,7 @@ var bricks = [];
 var acc = 0;
 var touchX = 0;
 var touchY = 0;
-
+var prevtouchX = paddleX;
 for(c=0; c< brickColumnCount ; c++){
     bricks[c]=[];
     for(r=0; r< brickRowCount; r++){
@@ -195,7 +195,7 @@ function draw() {
 
 function sketchpad_touchStart() {
     getTouchPos();
-    drawDot(ctx,touchX,touchY,12);
+    //drawDot(ctx,touchX,touchY,12);
     // Prevents an additional mousedown event being triggered
     event.preventDefault();
 }
@@ -203,7 +203,7 @@ function sketchpad_touchStart() {
 function sketchpad_touchMove(e) { 
     // Update the touch co-ordinates
     getTouchPos(e);
-    drawDot(ctx,touchX,touchY,12); 
+    //drawDot(ctx,touchX,touchY,12); 
     event.preventDefault();
 }
 
@@ -216,11 +216,11 @@ function getTouchPos(e) {
             touchX=touch.pageX-touch.target.offsetLeft;
             touchY=touch.pageY-touch.target.offsetTop;
             if(touchX > 0+paddleWidth/2 && touchX < canvas.width-paddleWidth/2) {
-                if(prevTouchX-TouchX>0)
+                if(prevtouchX-touchX>0)
                     acc=3;
                 else
                     acc=-3;
-                
+                prevtouchX=touchX;
                 paddleX = touchX - paddleWidth/2;
             }
         }
