@@ -216,8 +216,12 @@ function getTouchPos(e) {
             touchX=touch.pageX-touch.target.offsetLeft;
             touchY=touch.pageY-touch.target.offsetTop;
             if(touchX > 0+paddleWidth/2 && touchX < canvas.width-paddleWidth/2) {
-		
-            paddleX = touchX - paddleWidth/2;
+                if(prevTouchX-TouchX>0)
+                    acc=3;
+                else
+                    acc=-3;
+                
+                paddleX = touchX - paddleWidth/2;
             }
         }
     }
