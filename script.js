@@ -26,6 +26,8 @@ var level_score = 0;
 var level = 0;
 var bricks = [];
 var acc = 0;
+var touchX = 0;
+var touchY = 0;
 
 for(c=0; c< brickColumnCount ; c++){
     bricks[c]=[];
@@ -59,6 +61,8 @@ function keyUpHandler(e) {
     
 document.addEventListener("keydown", keyDownHandler);
 document.addEventListener("keyup", keyUpHandler);
+canvas.addEventListener('touchstart', sketchpad_touchStart, false);
+canvas.addEventListener('touchmove', sketchpad_touchMove, false);
 
 var img = new Image();
 img.src = 'spinv01.jpg';
@@ -187,6 +191,38 @@ function draw() {
  
     requestAnimationFrame(draw);
 }
+
+
+function sketchpad_touchStart() {
+    getTouchPos();
+    drawDot(ctx,touchX,touchY,12);
+    // Prevents an additional mousedown event being triggered
+    event.preventDefault();
+}
+
+function sketchpad_touchMove(e) { 
+    // Update the touch co-ordinates
+    getTouchPos(e);
+    drawDot(ctx,touchX,touchY,12); 
+    event.preventDefault();
+}
+
+function getTouchPos(e) {
+    if (!e)
+        e = event;
+    if (e.touches) {
+        if (e.touches.length == 1) { // Only deal with one finger
+            var touch = e.touches[0]; // Get the information for finger #1
+            touchX=touch.pageX-touch.target.offsetLeft;
+            touchY=touch.pageY-touch.target.offsetTop;
+            if(touchX > 0+paddleWidth/2 && touchX < canvas.width-paddleWidth/2) {
+		
+            paddleX = touchX - paddleWidth/2;
+            }
+        }
+    }
+}
+
 
 draw();
 
