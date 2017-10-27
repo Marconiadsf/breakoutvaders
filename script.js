@@ -59,7 +59,6 @@ function keyUpHandler(e) {
     
 document.addEventListener("keydown", keyDownHandler);
 document.addEventListener("keyup", keyUpHandler);
-documment.addEventListener("touchmove", touchXY, true);
 
 var img = new Image();
 img.src = 'spinv01.jpg';
@@ -192,28 +191,5 @@ function draw() {
 draw();
 
 
-//ctx.addEventListener("touchstart", touchDown, false);
-
-//ctx.addEventListener("touchend", touchUp, false);
-
-//function touchXY(e) {
-//    if (!e)
-//    var e = event;
-//    e.preventDefault();
-
-//    canX = e.targetTouches[0].pageX - can.offsetLeft;
-//    canY = e.targetTouches[0].pageY - can.offsetTop;
-
-//}
-
- function touchXY(e) {
-	var relativeX = e.clientX - canvas.offsetLeft;
-	if(relativeX > 0+paddleWidth/2 && relativeX < canvas.width-paddleWidth/2) {
-		paddleX = relativeX - paddleWidth/2;
-	}
-}
-
-   
- 
 
 
