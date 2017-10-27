@@ -217,9 +217,9 @@ function getTouchPos(e) {
             touchY=touch.pageY-touch.target.offsetTop;
             if(touchX > 0+paddleWidth/2 && touchX < canvas.width-paddleWidth/2) {
                 if(prevtouchX-touchX>0)
-                    acc=3;
-                else
                     acc=-3;
+                else
+                    acc=3;
                 prevtouchX=touchX;
                 paddleX = touchX - paddleWidth/2;
             }
